@@ -480,6 +480,8 @@ export interface ApiWorkWork extends Struct.CollectionTypeSchema {
     category: Schema.Attribute.Enumeration<
       ['webapp', 'mobileapp', 'website', 'custom']
     >;
+    client: Schema.Attribute.String;
+    completed: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -490,7 +492,9 @@ export interface ApiWorkWork extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::work.work'> &
       Schema.Attribute.Private;
+    overview: Schema.Attribute.Blocks;
     publishedAt: Schema.Attribute.DateTime;
+    role: Schema.Attribute.String;
     Title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
