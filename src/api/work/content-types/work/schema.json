@@ -35,6 +35,18 @@
         "website",
         "custom"
       ]
+    },
+    "client": {
+      "type": "string"
+    },
+    "role": {
+      "type": "string"
+    },
+    "completed": {
+      "type": "string"
+    },
+    "overview": {
+      "type": "blocks"
     }
   }
 }
