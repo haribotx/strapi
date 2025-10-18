@@ -47,6 +47,9 @@
     },
     "overview": {
       "type": "blocks"
+    },
+    "workName": {
+      "type": "string"
     }
   }
 }
