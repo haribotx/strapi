@@ -5,20 +5,25 @@ export default {
     if (result.publishedAt) {
       setTimeout(async () => {
         try {
-          await strapi
-            .plugin("email")
-            .service("email")
-            .send({
-              to: process.env.SMTP_USERNAME,
-              subject: `New Contact Message from ${result.name}`,
-              html: `
-                <h2>New Contact Message Received</h2>
-                <p><strong>Name:</strong> ${result.name}</p>
-                <p><strong>Email:</strong> ${result.email}</p>
-                <p><strong>Message:</strong></p>
-                <p>${result.message}</p>
-              `,
-            });
+          const sendTo =
+            process.env.NODE_ENV === "production"
+              ? process.env.STRAPI_EMAIL_DEFAULT_FROM
+              : process.env.SMTP_USERNAME;
+
+          console.log("Sending to:", sendTo);
+          console.log("Environment:", process.env.NODE_ENV);
+
+          await strapi.plugin("email").service("email").send({
+            to: sendTo,
+            subject: `New Contact Message from ${result.name}`,
+            html: `
+              <h2>New Contact Message Received</h2>
+              <p><strong>Name:</strong> ${result.name}</p>
+              <p><strong>Email:</strong> ${result.email}</p>
+              <p><strong>Message:</strong></p>
+              <p>${result.message}</p>
+            `,
+          });
 
           strapi.log.info("Email Sent");
         } catch (err) {
