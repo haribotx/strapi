@@ -14,16 +14,6 @@
     "name": {
       "type": "string"
     },
-    "image": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
-    },
     "icon": {
       "type": "media",
       "multiple": false,

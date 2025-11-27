@@ -14,7 +14,7 @@
     "name": {
       "type": "string"
     },
-    "image": {
+    "icon": {
       "type": "media",
       "multiple": true,
       "allowedTypes": [
