@@ -32,16 +32,30 @@
 // });
 
 
+// module.exports = ({ env }) => ({
+//   email: {
+//     config: {
+//       provider: "strapi-provider-email-strapi-cloud",
+//       providerOptions: {
+//         apiToken: env("STRAPI_CLOUD_EMAIL_API_TOKEN"),
+//       },
+//       settings: {
+//         defaultFrom: "libin.botxbotxswe2403@gmail.com",
+//         defaultReplyTo: "libin.botxbotxswe2403@gmail.com",
+//       },
+//     },
+//   },
+// });
+
+
 module.exports = ({ env }) => ({
   email: {
     config: {
-      provider: "strapi-provider-email-strapi-cloud",
-      providerOptions: {
-        apiToken: env("STRAPI_CLOUD_EMAIL_API_TOKEN"),
-      },
+      provider: env("EMAIL_PROVIDER", "strapi-provider-email-strapi-cloud"),
+      providerOptions: env.json("EMAIL_PROVIDER_OPTIONS", {}),
       settings: {
-        defaultFrom: "libin.botxbotxswe2403@gmail.com",
-        defaultReplyTo: "libin.botxbotxswe2403@gmail.com",
+        defaultFrom: env("EMAIL_DEFAULT_FROM"),
+        defaultReplyTo: env("EMAIL_DEFAULT_REPLY_TO"),
       },
     },
   },

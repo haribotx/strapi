@@ -66,25 +66,42 @@
 // };
 
 
+// module.exports = {
+//   async afterCreate(event) {
+//     const { result } = event;
+
+//     try {
+//       await strapi.plugins['email'].services.email.send({
+//         to: "libin.botxbotxswe2403@gmail.com",   // ADMIN EMAIL
+//         subject: `New Contact Message from ${result.name}`,
+//         text: `
+// Name: ${result.name}
+// Email: ${result.email}
+// Message: ${result.message}
+//         `,
+//       });
+
+//       console.log("Admin email sent successfully!");
+//     } catch (err) {
+//       console.error("Failed to send admin email:", err);
+//     }
+//   },
+// };
+
 module.exports = {
   async afterCreate(event) {
     const { result } = event;
 
-    try {
-      await strapi.plugins['email'].services.email.send({
-        to: "libin.botxbotxswe2403@gmail.com",   // ADMIN EMAIL
-        subject: `New Contact Message from ${result.name}`,
-        text: `
+    await strapi.plugins["email"].services.email.send({
+      to: process.env.ADMIN_EMAIL, // owner/admin email
+      subject: "New Contact Message Received",
+      text: `
+A new message has been received:
+
 Name: ${result.name}
 Email: ${result.email}
 Message: ${result.message}
-        `,
-      });
-
-      console.log("Admin email sent successfully!");
-    } catch (err) {
-      console.error("Failed to send admin email:", err);
-    }
+      `,
+    });
   },
 };
-
